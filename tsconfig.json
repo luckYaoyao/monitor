@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "lib": ["esnext", "dom"],
+    "sourceMap": true,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts"]
+}
