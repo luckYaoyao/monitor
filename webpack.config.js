@@ -33,6 +33,12 @@ const config = {
             logging: 'info',
             overlay: true,
             progress: true
+        },
+        proxy: {
+            '/app': {
+                target: 'http://localhost:6006',
+                changeOrigin: true
+            }
         }
     },
     watchOptions: {
