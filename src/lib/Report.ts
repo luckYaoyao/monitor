@@ -3,8 +3,8 @@ import Request from './Request'
 export default async (log: Object) => {
     try {
         const data = await Request({
-            url: '/app/monitor/log/list',
-            method: 'get',
+            url: '/app/monitor/log/add',
+            method: 'post',
             data: log
         })
         console.log(data)
