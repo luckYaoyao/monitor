@@ -1,5 +1,7 @@
-const METHOD_GET = 'GET'
-const METHOD_POST = 'POST'
+type HttpMethod = 'GET' | 'POST' | 'OPTION' | 'PUT'
+
+const METHOD_GET: HttpMethod = 'GET'
+const METHOD_POST: HttpMethod = 'POST'
 
 interface RequestOption {
     // 请求方法
@@ -13,11 +15,7 @@ interface RequestOption {
 const formatParams = (params: any) => {
     let arr: Array<string> = []
     for (let key in params) {
-        if (
-            params[key] ||
-            params[key] === 0 ||
-            params[key] === false
-        ) {
+        if (params[key] || params[key] === 0 || params[key] === false) {
             arr.push(`${key}=${encodeURI(params[key])}`)
         }
     }
@@ -35,13 +33,11 @@ const Request = function (params: RequestOption) {
         }
 
         xhr.open(method, url)
-
         setContentType(xhr, 'json')
+
         xhr.onreadystatechange = function () {
-            if (
-                xhr.readyState === 4 &&
-                xhr.status === 200
-            ) {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log('124214', xhr.response)
                 resolve(xhr.response)
             }
         }
@@ -60,6 +56,8 @@ const Request = function (params: RequestOption) {
         }
 
         if (method.toUpperCase() == METHOD_POST) {
+            setRequestHeader(xhr, 'x-log-apiversion', '0.6.0')
+            setRequestHeader(xhr, 'x-log-bodyrawsize', JSON.stringify(data).length + '')
             xhr.send(JSON.stringify(data))
         }
     })
@@ -80,16 +78,14 @@ const contentTypeList: ContentType = {
     html: 'text/html; charset=utf-8'
 }
 
-const setContentType = (
-    xhr: XMLHttpRequest,
-    type: string
-) => {
+const setContentType = (xhr: XMLHttpRequest, type: string) => {
     if (contentTypeList[type]) {
-        xhr.setRequestHeader(
-            'Content-Type',
-            contentTypeList[type]
-        )
+        xhr.setRequestHeader('Content-Type', contentTypeList[type])
     }
+}
+
+const setRequestHeader = (xhr: XMLHttpRequest, key: string, value: string) => {
+    xhr.setRequestHeader(key, value)
 }
 
 export default Request

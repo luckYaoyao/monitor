@@ -1,0 +1,1 @@
+type ErrorEventUnion = ErrorEvent | PromiseRejectionEvent

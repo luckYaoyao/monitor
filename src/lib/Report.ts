@@ -1,15 +1,8 @@
-import Request from './Request'
+const DEFAULT_URL = 'http://yunhai-vision.com:3000/images/gs.gif'
 
-export default async (log: Object) => {
-    try {
-        const data = await Request({
-            url: '/app/monitor/log/add',
-            method: 'post',
-            data: log
-        })
-        console.log(data)
-    } catch (error: any) {
-        // Todo 全局处理
-        console.log('report', error)
-    }
+const report = (data: any, url: string = DEFAULT_URL) => {
+    let image = new Image()
+    image.src = `${url}?d=${ encodeURIComponent(JSON.stringify(data)) }`
 }
+
+export default report

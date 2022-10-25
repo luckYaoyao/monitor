@@ -1,11 +1,13 @@
 const path = require('path')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
 
 const config = {
     mode: 'development',
     devtool: 'source-map',
     entry: './src/index.ts',
     output: {
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, '../dist'),
         filename: 'Monitor.js',
         library: 'Monitor',
         libraryTarget: 'umd',
@@ -15,20 +17,31 @@ const config = {
         rules: [
             {
                 test: /\.ts$/,
-                loader: 'ts-loader'
+                loader: 'ts-loader',
+                exclude: /node_modules/
             }
         ]
     },
     resolve: {
-        extensions: ['.ts', '...']
+        extensions: ['.ts', '.js', '.tsx']
     },
+    plugins: [
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: ['./dist']
+        }),
+        new HTMLWebpackPlugin({
+            title: '测试模板',
+            template: './test/index.html',
+            // 去掉默认值defer
+            scriptLoading: 'blocking'
+        })
+    ],
     devServer: {
+        host: 'localhost',
         port: 4000,
         static: {
-            directory: path.join(__dirname, '../')
+            directory: path.join(__dirname, '../dist')
         },
-        hot: true,
-        open: true,
         client: {
             logging: 'info',
             overlay: true,

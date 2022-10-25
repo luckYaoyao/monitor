@@ -1,77 +1,109 @@
-<script src="../dist/Monitor.js"></script>
-
-<h3>JavaScript 的错误种类</h3>
-
-<ul>
-  <h3 class="title">1. 执行时的错误- 错误类型</h3>
-  <li>
-    Error
-  </li>
-  <li>
-    SyntaxError 语法错误：
-    <br />
-    a.变量名不符合规范
-    <br />
-    b.缺少括号引发的语法错误
-    <br />
-    c.用let、const声明重复变量/常量
-    <p>语法错误addEventListener('error') 监听不到</p>
-  </li>
-  <li>
-    TypeError 类型错误：当值不是预期数据类型、调用无效方法时都会抛出此错误。
-    <br />
-    a:new后面接字符串、数值、布尔值等（new后面应该接构造函数）
-    <br />
-    b:调用不存在的方法
-    <p>语法错误addEventListener('error') 监听不到, 能使用try catch捕获</p>
-  </li>
-  <li>
-    Reference 引用错误：当值不是预期数据类型、调用无效方法时都会抛出此错误。
-    <br />
-    a:new后面接字符串、数值、布尔值等（new后面应该接构造函数）
-    <br />
-    b:调用不存在的方法
-    <p>语法错误addEventListener('error') 监听不到, 能使用try catch捕获</p>
-  </li>
-</ul>
-
-<ul>
-  <h3 class="title">2. 资源加载错误</h3>
-  <li>
-    1.1
-  </li>
-</ul>
-
-<ul>
-  <h3 class="title">3. 网络请求错误</h3>
-  <li>
-    1.1
-  </li>
-</ul>
-
 <script>
-  new Monitor()
-  /* 1. 语法错误
-    new Monitor()
-      try {
-        var 1s
-      } catch(error) {
-        console.log(error)
-      }
-      */
-
-  /* 2.类型错误
-
-    */
-  // try {
-  //   new '141'()
-  //   obj.sayHello()
-  // } catch (e) {
-  //   console.log(e)
-  // }
-
-  function getTypeError() {
-    throw new Error('11')
-  }
-  getTypeError()
+    // 白屏时间
+    console.log('白屏时间', Date.now() - performance.timing.navigationStart)
 </script>
+<script src="../dist/Monitor.js"></script>
+<script>
+    new Monitor()
+    // 1. 语法错误 SyntaxError -- 无法捕获
+    // var 1s;
+
+    // 2.类型错误 TypeError
+    const num = 1
+    // num = 2
+
+    // 3. ReferenceError
+    // console.log(nodefined) // 4. RangeError
+    // ;(function fn() {
+    //     fn()
+    // })()
+
+    // new Promise((resolve, reject) => {
+    //     throw new Error('124141')
+    // })
+
+    // function getTypeError() {
+    //     throw new Error('11')
+    // }
+    // getTypeError()
+
+    // function getPromiseError() {
+    //     return new Promise((resolve, reject) => {
+    //         throw new Error('1')
+    //     })
+    // }
+    // getPromiseError()
+
+    fetch('http://example.com/movies.json')
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+        })
+    // .catch((error) => {
+    //     console.log(error)
+    // })
+
+    // fetch('http://example.com/movies.json')
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //         console.log(data)
+    //     })
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- <link rel="stylesheet" href="fa.css" /> -->
+        <!-- <script src="12.js"></script> -->
+        <title>Document</title>
+    </head>
+    <body>
+        <h3>JavaScript 的错误种类</h3>
+        <ul>
+            <h3 class="title">1. 执行时的错误- 错误类型</h3>
+            <li>Error</li>
+            <li>
+                SyntaxError 语法错误：
+                <br />
+                a.变量名不符合规范
+                <br />
+                b.缺少括号引发的语法错误
+                <br />
+                c.用let、const声明重复变量/常量
+                <p>语法错误addEventListener('error') 监听不到</p>
+            </li>
+            <li>
+                TypeError 类型错误：当值不是预期数据类型、调用无效方法时都会抛出此错误。
+                <br />
+                a:new后面接字符串、数值、布尔值等（new后面应该接构造函数）
+                <br />
+                b:调用不存在的方法
+                <p>语法错误addEventListener('error') 监听不到, 能使用try catch捕获</p>
+            </li>
+            <li>
+                Reference 引用错误：当值不是预期数据类型、调用无效方法时都会抛出此错误。
+                <br />
+                a:new后面接字符串、数值、布尔值等（new后面应该接构造函数）
+                <br />
+                b:调用不存在的方法
+                <p>语法错误addEventListener('error') 监听不到, 能使用try catch捕获</p>
+            </li>
+        </ul>
+
+        <ul>
+            <h3 class="title">2. 资源加载错误</h3>
+            <li>1.1</li>
+        </ul>
+
+        <ul>
+            <h3 class="title">3. 网络请求错误</h3>
+            <li>1.1</li>
+        </ul>
+        <!-- <img src="./images/ada" alt="" /> -->
+    </body>
+</html>
+
+<!-- <img src="a.png" alt="" /> -->
