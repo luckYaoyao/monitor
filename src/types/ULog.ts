@@ -1,22 +1,29 @@
+// 监控指标的大类-稳定性、访问统计
+type kind = 'stability' | 'access'
+// 小类型-错误
+type miniType = 'error' | 'performance' | 'blank'
+// 错误类型-js执行错误、资源异常
+type errorType = 'jsError' | 'assetsError'
+
 interface ULog {
     // 监控指标的大类-稳定性
-    kind: string,
+    kind: kind
     // 小类型-错误
-    type: string,
+    type: miniType
     // JS执行错误
-    error: string,
+    errorType: errorType
     // 访问路径报错
-    url: string,
+    url: string
     // 报错信息
-    message: string,
+    message: string
     // 哪个文件报错了
-    filename: string,
+    filename: string
     // 报错行和列
-    position: string,
+    position: string
     // 堆栈信息
-    stack: string,
-    // 代表事件名称
-    selector: string
+    stack: string
+    // 时间
+    timeStamp: number
 }
 
 export default ULog
